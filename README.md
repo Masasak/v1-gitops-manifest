@@ -1,0 +1,1 @@
+# v1-gitops-manifest
