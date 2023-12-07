@@ -6,39 +6,39 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-    name: root-app
-    namespace: argocd
+  name: root-app
+  namespace: argocd
 spec:
-    template:
-        metadata:
-            name: 'snapvibe-service'
+  template:
+    metadata:
+      name: 'snapvibe-service'
         spec:
-            project: {{ $project }}
+          project: {{ $project }}
             destination:
-                server: {{ $destination }}
-                namespace: {{ $namespace }}
+              server: {{ $destination }}
+              namespace: {{ $namespace }}
             source:
-                path: apps
-                repoURL: {{ $repositoryURL }}
-                targetRevision: HEAD
-                helm:
-                    values: |
-                        {{- $map :=
-                            (dict "spec"
-                                (dict
-                                "project" $project
-                                "destination"
-                                    (dict "server" $destination)
-                                "source"
-                                    (dict "serverPath" "server-spec" "repoURL" $repositoryURL "targetRevision" "HEAD" "imageRegistry" $imageRegistry)
-                                )
-                            )
-                        }}
-                        {{- $map | toYaml | nindent 12 | toString }}
+              path: apps
+              repoURL: {{ $repositoryURL }}
+              targetRevision: HEAD
+              helm:
+                values: |
+                  {{- $map :=
+                    (dict "spec"
+                      (dict
+                      "project" $project
+                      "destination"
+                        (dict "server" $destination)
+                      "source"
+                        (dict "serverPath" "server-spec" "repoURL" $repositoryURL "targetRevision" "HEAD" "imageRegistry" $imageRegistry)
+                      )
+                    )
+                  }}
+                  {{- $map | toYaml | nindent 12 | toString }}
             syncPolicy:
-                automated:
-                    prune: true
-                    selfHeal: true
-                syncOptions:
-                - Createnamespace=true
-                - "--creds=argocd-ecr-secret"
+              automated:
+                  prune: true
+                  selfHeal: true
+              syncOptions:
+              - Createnamespace=true
+              - "--creds=argocd-ecr-secret"
