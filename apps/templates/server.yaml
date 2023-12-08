@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: '{{ .Values.spec.project }}-service'
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: {{ .Values.spec.source.repoURL }}
+      revision: HEAD
+      files:
+      - path: "apps/resource/{{ .Values.spec.name }}/resource.yaml"
+  template:
+    metadata:
+      name: '{{`{{ config.serviceName }}`}}'
+      labels:
+        project: '{{`{{ config.serviceName }}`}}'
+        layer: service
+    spec:
+      project: {{ .Values.spec.project }}
+      destination:
+        server: {{ .Values.spec.destination.server }}
+        namespace: 'snapvibe-service'
+      source:
+        path: {{ .Values.spec.source.serverPath }}
+        repoURL: {{ .Values.spec.source.repoURL }}
+        targetRevision: {{ .Values.spec.source.targetRevision }}
+        helm:
+          values: |-
+            name: '{{`{{ config.serviceName }}`}}'
+            imageRegistry: '{{ .Values.spec.source.imageRegistry }}'
+            imageTag: '{{`{{ config.imageTag }}`}}'
+            containerPort: '{{`{{ config.containerPort }}`}}'
+            prefix: '{{`{{ config.prefix }}`}}'
+            replicas: {{`{{ config.replicas }}`}}
+            volume:
+              name: '{{`{{ config.volume.name }}`}}'
+              mountPath: '{{`{{ config.volume.mountPath }}`}}'
+              secretName: '{{`{{ config.volume.secretName }}`}}'
+            serviceAccount: '{{`{{ config.serviceAccount }}`}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
