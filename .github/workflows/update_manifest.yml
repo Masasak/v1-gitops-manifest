@@ -58,15 +58,15 @@ jobs:
                         .config.imageTag = \"${{ env.image_tag }}\" | \
                         .config.containerPort = ${{ env.service_port }} | \
                         $prefix" -i ${{ steps.config-file.outputs.config_file_path }}
-
-          - name: Commit The New Image Reference
-            if: ${{ env.service_name && env.service_prefix && env.image_tag}}
+          
+          - name: Commit The Chart Realease
             uses: stefanzweifel/git-auto-commit-action@v4
             with:
-                commit_message: "update :: ${{ env.service_name }}: Deploy new image ${{ env.image_tag }}"
-                branch: main
-                commit_options: '--no-verify --signoff'
-                repository: .
-                commit_user_name: Masasak
-                commit_user_email: team.Masasak@gamil.com
-                commit_author: Masasak <team.Masasak@gamil.com>
+              commit_message: "update :: ${{ env.service_name }}: Deploy new image ${{ env.image_tag }}"
+              commit_options: '--no-verify --signoff'
+              branch: main
+              skip_checkout: true
+              repository: .
+              commit_user_name: Masasak
+              commit_user_email: team.Masasak@gamil.com
+              commit_author: Masasak <team.Masasak@gamil.com>
