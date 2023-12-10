@@ -1,0 +1,11 @@
+config:
+  volume:
+    name: null
+    mountPath: null
+    secretName: null
+  serviceAccount: null
+  replicas: 1
+  service_name: gateway
+  imageTag: ce197dfe19ecb4cf95263c5a215eb3bcef98313b
+  containerPort: 8080
+  prefix: /
