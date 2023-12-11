@@ -28,13 +28,14 @@ spec:
                 (dict
                 "project" $project
                 "destination"
-                  (dict "server" $destination)
+                  (dict "server" $destination "namespace" $namespace)
                 "source"
                   (dict "serverPath" "server-spec" "repoURL" $repoURL "targetRevision" "HEAD" "imageRegistry" $imageRegistry)
                 )
               )
             }}
-            {{- $map | toYaml | nindent 12 | toString }}
+            {{- $yaml := $map | toYaml | nindent 12 }}
+            {{- $yaml | toString | trim | indent 10 }}
       syncPolicy:
         automated:
           prune: true
