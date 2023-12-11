@@ -22,6 +22,8 @@ spec:
         repoURL: {{ $repoURL }}
         targetRevision: HEAD
         helm:
+          valueFiles:
+            - 'values.yaml'
           values: |
             {{- $map :=
               (dict "spec"
