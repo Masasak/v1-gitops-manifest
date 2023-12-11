@@ -34,8 +34,7 @@ spec:
                 )
               )
             }}
-            {{- $yaml := $map | toYaml | nindent 12 }}
-            {{- $yaml | toString | trim | indent 10 }}
+            {{- $map := $map | toYaml | nindent 12 }}
       syncPolicy:
         automated:
           prune: true
