@@ -21,22 +21,6 @@ spec:
         path: apps
         repoURL: {{ $repoURL }}
         targetRevision: HEAD
-        # helm:
-        #   valueFiles:
-        #     - 'values.yaml'
-        #   values: |
-        #     {{- $map :=
-        #       (dict "spec"
-        #         (dict
-        #         "project" $project
-        #         "destination"
-        #           (dict "server" $destination)
-        #         "source"
-        #           (dict "serverPath" "server-spec" "repoURL" $repoURL "targetRevision" "HEAD" "imageRegistry" $imageRegistry)
-        #         )
-        #       )
-        #     }}
-        #     {{- $map | toYaml | nindent 12 | toString }}
       syncPolicy:
         automated:
           prune: true
