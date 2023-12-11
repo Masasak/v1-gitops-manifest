@@ -11,7 +11,7 @@ metadata:
 spec:
   template:
     metadata:
-      name: 'snapvibe-service'
+      name: snapvibe-service
     spec:
       project: {{ $project }}
       destination:
