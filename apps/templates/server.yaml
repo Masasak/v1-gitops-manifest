@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: '{{ .Values.spec.project }}-{{`{{ config.serviceName }}`}}'
+  name: '{{ .Values.spec.project }}-service'
   namespace: argocd
 spec:
   generators:
@@ -12,7 +12,7 @@ spec:
       - path: "apps/resource/**/resource.yaml"
   template:
     metadata:
-      name: '{{`{{ config.serviceName }}`}}'
+      name: '{{ config.serviceName }}'
     spec:
       project: {{ .Values.spec.project }}
       destination:
@@ -24,17 +24,17 @@ spec:
           targetRevision: {{ .Values.spec.source.targetRevision }}
           helm:
             values: |-
-              name: '{{`{{ config.serviceName }}`}}'
+              name: '{{ config.serviceName }}'
               imageRegistry: '{{ .Values.spec.source.imageRegistry }}'
-              imageTag: '{{`{{ config.imageTag }}`}}'
-              containerPort: '{{`{{ config.containerPort }}`}}'
-              prefix: '{{`{{ config.prefix }}`}}'
-              replicas: {{`{{ config.replicas }}`}}
+              imageTag: '{{ config.imageTag }}'
+              containerPort: '{{ config.containerPort }}'
+              prefix: '{{ config.prefix }}'
+              replicas: {{ config.replicas }}
               volume:
-                name: '{{`{{ config.volume.name }}`}}'
-                mountPath: '{{`{{ config.volume.mountPath }}`}}'
-                secretName: '{{`{{ config.volume.secretName }}`}}'
-                serviceAccount: '{{`{{ config.serviceAccount }}`}}'
+                name: '{{ config.volume.name }}'
+                mountPath: '{{ config.volume.mountPath }}'
+                secretName: '{{ config.volume.secretName }}'
+                serviceAccount: '{{ config.serviceAccount }}'
         syncPolicy:
           automated:
             prune: true
