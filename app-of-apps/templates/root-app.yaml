@@ -2,7 +2,6 @@
 {{- $destination := "https://kubernetes.default.svc" }}
 {{- $repoURL := "https://github.com/Masasak/v1-gitops-manifest.git" }}
 {{- $namespace := "snapvibe-service" }}
-{{- $imageRegistry := "250832144271.dkr.ecr.ap-northeast-2.amazonaws.com" }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:

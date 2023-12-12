@@ -1,3 +1,13 @@
 spec:
-  namespace: snapvibe-service
-  host: null
+  destination:
+    namespace: snapvibe-service
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/Masasak/v1-gitops-manifest.git
+    targetRevision: HEAD
+  syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - Createnamespace=true
