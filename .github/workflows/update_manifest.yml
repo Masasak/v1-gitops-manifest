@@ -56,7 +56,7 @@ jobs:
               prefix='.config.prefix = null'
               fi
 
-              yq eval -i ".config.service_name = \"${{ env.service_name }}\" | \
+              yq eval -i ".config.serviceName = \"${{ env.service_name }}\" | \
                         .config.imageTag = \"${{ env.image_tag }}\" | \
                         .config.containerPort = ${{ env.service_port }} | \
                         $prefix" -i ${{ steps.config-file.outputs.config_file_path }}

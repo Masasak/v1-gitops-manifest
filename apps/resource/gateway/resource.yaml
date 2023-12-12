@@ -5,7 +5,7 @@ config:
     secretName: null
   serviceAccount: null
   replicas: 1
-  service_name: gateway
+  serviceName: gateway
   imageTag: 099f5a80b6c80cf63b97bf00b9d40aa94ec4c28f
   containerPort: 8080
   prefix: /
