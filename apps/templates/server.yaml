@@ -10,21 +10,24 @@ spec:
       revision: HEAD
       files:
       - path: "apps/resource/**/resource.yaml"
-  spec:
-    project: {{ .Values.spec.project }}
-    destination:
-        server: {{ .Values.spec.destination.server }}
-        namespace: 'snapvibe-service'
-      source:
-        path: {{ .Values.spec.source.serverPath }}
-        repoURL: {{ .Values.spec.source.repoURL }}
-        targetRevision: {{ .Values.spec.source.targetRevision }}
-        helm:
-          values: |-
-            {{- define "config" -}}
-            {{ toYaml .Values.config | nindent 8 }}
-            {{- end -}}
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
+  template:
+    metadata:
+      name: '{{`{{ config.serviceName }}`}}'
+    spec:
+      project: {{ .Values.spec.project }}
+      destination:
+          server: {{ .Values.spec.destination.server }}
+          namespace: 'snapvibe-service'
+        source:
+          path: {{ .Values.spec.source.serverPath }}
+          repoURL: {{ .Values.spec.source.repoURL }}
+          targetRevision: {{ .Values.spec.source.targetRevision }}
+          helm:
+            values: |-
+              {{- define "config" -}}
+              {{ toYaml .Values.config | nindent 8 }}
+              {{- end -}}
+        syncPolicy:
+          automated:
+            prune: true
+            selfHeal: true
