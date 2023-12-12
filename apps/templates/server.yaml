@@ -9,7 +9,7 @@ spec:
       repoURL: {{ .Values.spec.source.repoURL }}
       revision: HEAD
       files:
-      - path: "apps/resource/{{ .Values.spec.name }}/resource.yaml"
+      - path: "apps/resource/**/resource.yaml"
   template:
     metadata:
       name: '{{`{{ config.serviceName }}`}}'
