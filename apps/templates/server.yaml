@@ -29,7 +29,7 @@ spec:
               imageTag: '{{`{{ .config.imageTag }}`}}'
               containerPort: '{{`{{ .config.containerPort }}`}}'
               prefix: '{{`{{ .config.prefix }}`}}'
-              replicas: {{ .config.replicas }}
+              replicas: '{{`{{ .config.replicas }}`}}'
               volume:
                 name: '{{`{{ .config.volume.name }}`}}'
                 mountPath: '{{`{{ .config.volume.mountPath }}`}}'
