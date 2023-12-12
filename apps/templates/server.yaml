@@ -12,7 +12,7 @@ spec:
       - path: "apps/resource/**/resource.yaml"
   template:
     metadata:
-      name: {{ config.serviceName }}
+      name: {{ .config.serviceName }}
     spec:
       project: {{ .Values.spec.project }}
       destination:
