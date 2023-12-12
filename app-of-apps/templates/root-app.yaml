@@ -3,6 +3,7 @@
 {{- $repoURL := "https://github.com/Masasak/v1-gitops-manifest.git" }}
 {{- $namespace := "snapvibe-service" }}
 {{- $imageRegistry := "250832144271.dkr.ecr.ap-northeast-2.amazonaws.com" }}
+{{- $targetRevision := "HEAD" }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -16,7 +17,7 @@ spec:
   source:
     path: apps
     repoURL: {{ $repoURL }}
-    targetRevision: HEAD
+    targetRevision: {{ $targetRevision }}
     helm:
       values: |
         {{- $map :=
@@ -26,7 +27,7 @@ spec:
             "destination"
               (dict "server" $destination)
             "source"
-              (dict "serverPath" "server-spec" "repoURL" $repoURL "targetRevision" "HEAD" "imageRegistry" $imageRegistry)
+              (dict "serverPath" "server-spec" "repoURL" $repoURL "targetRevision" $targetRevision "imageRegistry" $imageRegistry)
             )
           )
         }}
