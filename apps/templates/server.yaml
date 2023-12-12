@@ -27,7 +27,7 @@ spec:
               name: '{{`{{ config.serviceName }}`}}'
               imageRegistry: '{{ .Values.spec.source.imageRegistry }}'
               imageTag: '{{`{{ .config.imageTag }}`}}'
-              containerPort: {{ .config.containerPort }}
+              containerPort: '{{`{{ .config.containerPort }}`}}'
               prefix: '{{`{{ .config.prefix }}`}}'
               replicas: {{ .config.replicas }}
               volume:
