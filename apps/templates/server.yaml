@@ -24,7 +24,7 @@ spec:
           targetRevision: {{ .Values.spec.source.targetRevision }}
           helm:
             values: |-
-              name: '{{ .config.serviceName }}'
+              name: '{{`{{ config.serviceName }}`}}'
               imageRegistry: '{{ .Values.spec.source.imageRegistry }}'
               imageTag: '{{ .config.imageTag }}'
               containerPort: '{{ .config.containerPort }}'
