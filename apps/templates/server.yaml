@@ -26,15 +26,15 @@ spec:
             values: |-
               name: '{{`{{ config.serviceName }}`}}'
               imageRegistry: '{{ .Values.spec.source.imageRegistry }}'
-              imageTag: '{{ .config.imageTag }}'
-              containerPort: '{{ .config.containerPort }}'
-              prefix: '{{ .config.prefix }}'
+              imageTag: '{{`{{ .config.imageTag }}`}}'
+              containerPort: {{ .config.containerPort }}
+              prefix: '{{`{{ .config.prefix }}`}}'
               replicas: {{ .config.replicas }}
               volume:
-                name: '{{ .config.volume.name }}'
-                mountPath: '{{ .config.volume.mountPath }}'
-                secretName: '{{ .config.volume.secretName }}'
-                serviceAccount: '{{ .config.serviceAccount }}'
+                name: '{{`{{ .config.volume.name }}`}}'
+                mountPath: '{{`{{ .config.volume.mountPath }}`}}'
+                secretName: '{{`{{ .config.volume.secretName }}`}}'
+                serviceAccount: '{{`{{ .config.serviceAccount }}`}}'
         syncPolicy:
           automated:
             prune: true
