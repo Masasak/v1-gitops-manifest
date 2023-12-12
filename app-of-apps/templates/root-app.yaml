@@ -9,35 +9,34 @@ metadata:
   name: root-app
   namespace: argocd
 spec:
-  template:
-    metadata:
-      name: snapvibe-service
-    spec:
-      project: {{ $project }}
-      destination:
-        server: {{ $destination }}
-        namespace: {{ $namespace }}
-      source:
-        path: apps
-        repoURL: {{ $repoURL }}
-        targetRevision: HEAD
-        helm:
-          values: |
-            {{- $map :=
-              (dict "spec"
-                (dict
-                "project" $project
-                "destination"
-                  (dict "server" $destination)
-                "source"
-                  (dict "serverPath" "server-spec" "repoURL" $repoURL "targetRevision" "HEAD" "imageRegistry" $imageRegistry)
-                )
+  metadata:
+    name: snapvibe-service
+  spec:
+    project: {{ $project }}
+    destination:
+      server: {{ $destination }}
+      namespace: {{ $namespace }}
+    source:
+      path: apps
+      repoURL: {{ $repoURL }}
+      targetRevision: HEAD
+      helm:
+        values: |
+          {{- $map :=
+            (dict "spec"
+              (dict
+              "project" $project
+              "destination"
+                (dict "server" $destination)
+              "source"
+                (dict "serverPath" "server-spec" "repoURL" $repoURL "targetRevision" "HEAD" "imageRegistry" $imageRegistry)
               )
-            }}
-            {{- $map | toYaml | nindent 12 | toString }}.
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
-        syncOptions:
-          - Createnamespace=true
+            )
+          }}
+          {{- $map | toYaml | nindent 12 | toString }}.
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+      syncOptions:
+        - Createnamespace=true
