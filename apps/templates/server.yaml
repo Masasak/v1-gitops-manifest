@@ -18,24 +18,24 @@ spec:
       destination:
           server: {{ .Values.spec.destination.server }}
           namespace: snapvibe-service
-        source:
-          path: {{ .Values.spec.source.serverPath }}
-          repoURL: {{ .Values.spec.source.repoURL }}
-          targetRevision: {{ .Values.spec.source.targetRevision }}
-          helm:
-            values: |-
-              name: '{{`{{ config.serviceName }}`}}'
-              imageRegistry: '{{ .Values.spec.source.imageRegistry }}'
-              imageTag: '{{`{{ .config.imageTag }}`}}'
-              containerPort: '{{`{{ .config.containerPort }}`}}'
-              prefix: '{{`{{ .config.prefix }}`}}'
-              replicas: '{{`{{ .config.replicas }}`}}'
-              volume:
-                name: '{{`{{ .config.volume.name }}`}}'
-                mountPath: '{{`{{ .config.volume.mountPath }}`}}'
-                secretName: '{{`{{ .config.volume.secretName }}`}}'
-                serviceAccount: '{{`{{ .config.serviceAccount }}`}}'
-        syncPolicy:
-          automated:
-            prune: true
-            selfHeal: true
+      source:
+        path: {{ .Values.spec.source.serverPath }}
+        repoURL: {{ .Values.spec.source.repoURL }}
+        targetRevision: {{ .Values.spec.source.targetRevision }}
+        helm:
+          values: |-
+            name: '{{`{{ config.serviceName }}`}}'
+            imageRegistry: '{{ .Values.spec.source.imageRegistry }}'
+            imageTag: '{{`{{ .config.imageTag }}`}}'
+            containerPort: '{{`{{ .config.containerPort }}`}}'
+            prefix: '{{`{{ .config.prefix }}`}}'
+            replicas: '{{`{{ .config.replicas }}`}}'
+            volume:
+              name: '{{`{{ .config.volume.name }}`}}'
+              mountPath: '{{`{{ .config.volume.mountPath }}`}}'
+              secretName: '{{`{{ .config.volume.secretName }}`}}'
+              serviceAccount: '{{`{{ .config.serviceAccount }}`}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
