@@ -6,6 +6,6 @@ config:
   serviceAccount: null
   replicas: 1
   serviceName: gateway
-  imageTag: 479663c7980e00982225f080e89986a58d63e316
+  imageTag: 4143b5017d45af90a51a77f689d28594f0d2f1d1
   containerPort: 8080
   prefix: /
